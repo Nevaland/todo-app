@@ -2,9 +2,10 @@ import { writable } from "svelte/store";
 import { v4 as uuid } from "uuid";
 
 const _boards = [
-  { id: uuid(), title: "Planning" },
+  { id: uuid(), title: "Done." },
   { id: uuid(), title: "In Progress" },
-  { id: uuid(), title: "All Done" },
+  { id: uuid(), title: "To Do" },
+  { id: uuid(), title: "Deadline" },
 ];
 
 const createBoards = () => {

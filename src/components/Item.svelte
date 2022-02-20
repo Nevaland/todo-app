@@ -26,7 +26,7 @@
     on:mouseenter={() => hovering = true}
     on:mouseleave={() => hovering = false}
   >
-  <span class="drag-handle item-btn">=</span>
+  <span class="drag-handle">=</span>
 
   {#if isEditable}
     <input bind:value={item.title} />
@@ -57,5 +57,15 @@
   .item-done {
     text-decoration: line-through;
     color: gray;
+  }
+  .drag-handle {
+    border-radius: 6px;
+    background-color: rgb(241, 241, 241);
+    width: 24px;
+    height: 24px;
+    text-align: center;
+  }
+  .drag-handle:active {
+    background-color: rgb(214, 214, 214);
   }
 </style>

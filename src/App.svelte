@@ -19,8 +19,8 @@
     display: flex;
   }
   .container .item {
-    width: 300px;
+    /* width: 300px; */
     flex-grow: 1;
-    margin: 32px;
+    margin: 16px 12px;
   }
 </style>
