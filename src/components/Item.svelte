@@ -1,24 +1,57 @@
 <script>
-  export let item = null // Board에서 item값을 전달 받습니다.
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+
+  export let item = null
   let hovering = false
+  let isEditable = false
+
+  const handleRemoveItem = () => dispatch('remove', item)
+  const handleUpdateItem = () => dispatch('update', item)
+  const handleToggleEditable = () => {
+    isEditable = !isEditable
+    if (!isEditable) handleUpdateItem()
+  }
+  const handleToggleDone = () => {
+    item.done = !item.done
+    handleUpdateItem()
+  }
 </script>
 
 {#if item}
-<div
-  class="item card p-1 mb-1 shadow-sm"
+  <div
+    class="item card p-1 mb-2 shadow-sm"
     class:shadow={hovering}
     on:mouseenter={() => hovering = true}
     on:mouseleave={() => hovering = false}
->
-  <span>
-    {item.title}
-    <!-- item의 제목을 출력합니다. -->
-  </span>
+  >
+  {#if isEditable}
+    <input bind:value={item.title} />
+  {:else}
+    <span class:item-done={item.done} on:click={handleToggleDone}>
+      {item.title}
+    </span>
+  {/if}
+  <div class="item-action">
+    <button class="item-btn" on:click={handleToggleEditable}>E</button>
+    <button class="item-btn" on:click={handleRemoveItem}>-</button>
+  </div>
 </div>
 {/if}
 
 <style>
   .item {
-    transition: box-shadow 0.25s ease-in;
+    transition: box-shadow .25s ease-in;
+    flex-direction: row;
+    justify-content: space-between
+  }
+  .item-btn {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+  }
+  .item-done {
+    text-decoration: line-through;
+    color: gray;
   }
 </style>
