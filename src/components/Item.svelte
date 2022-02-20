@@ -20,11 +20,14 @@
 
 {#if item}
   <div
+    id={item.id}
     class="item card p-1 mb-2 shadow-sm"
     class:shadow={hovering}
     on:mouseenter={() => hovering = true}
     on:mouseleave={() => hovering = false}
   >
+  <span class="drag-handle item-btn">=</span>
+
   {#if isEditable}
     <input bind:value={item.title} />
   {:else}
@@ -32,6 +35,7 @@
       {item.title}
     </span>
   {/if}
+
   <div class="item-action">
     <button class="item-btn" on:click={handleToggleEditable}>E</button>
     <button class="item-btn" on:click={handleRemoveItem}>-</button>
